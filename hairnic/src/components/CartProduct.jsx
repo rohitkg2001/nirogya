@@ -33,12 +33,12 @@ const CartProduct = () => {
             style={{ maxWidth: 600 }}
           >
             <h1 className="text-primary mb-3">
-              <span className="fw-light text-dark">Our Natural</span> Hair
+              <span className="fw-light text-dark">Our Natural</span>
               Products
             </h1>
             <p className="mb-5">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-              aliquet, erat non malesuada consequat, nibh erat tempus risus.
+              The broadest definition of natural product is anything that is
+              produced by life, and includes the likes of biotic materials.
             </p>
           </div>
           <div className="row g-4">
@@ -85,11 +85,6 @@ const CartProduct = () => {
               </div>
             ))}
           </div>
-          <div className="col-12 text-center">
-            <a className="btn btn-primary py-2 px-4" href="#">
-              Load More Products
-            </a>
-          </div>
         </div>
       </div>
 
@@ -100,23 +95,34 @@ const CartProduct = () => {
         <Modal.Body>
           {selectedProduct && (
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 d-flex justify-content-center align-items-center">
                 <img
                   src={selectedProduct.image}
                   alt={selectedProduct.name}
                   className="img-fluid"
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "300px",
+                    objectFit: "contain",
+                  }}
                 />
               </div>
               <div className="col-md-6">
                 <h5>{selectedProduct.name}</h5>
+
+                {/* Display M.R.P. */}
                 <h6 className="text-muted">M.R.P: {selectedProduct.mrp}</h6>
+
+                {/* Display Price */}
                 <h5 className="text-primary">
                   Price: {selectedProduct.price} <br />
                   <small className="text-muted">Inclusive of all taxes</small>
                 </h5>
+
                 <p className="text-muted">{selectedProduct.description}</p>
                 <p className="text-muted">Weight: {selectedProduct.weight}</p>
 
+                {/* Quantity Controls */}
                 <div className="d-flex align-items-center mb-3">
                   <span className="me-3">Quantity:</span>
                   <Button
@@ -140,6 +146,7 @@ const CartProduct = () => {
                   </Button>
                 </div>
 
+                {/* Add to Cart and Buy Now Buttons */}
                 <div className="d-flex mb-3">
                   <Button variant="outline-primary" className="me-2">
                     Add To Cart
@@ -147,6 +154,7 @@ const CartProduct = () => {
                   <Button variant="primary">Buy Now</Button>
                 </div>
 
+                {/* Social Media Share Icons */}
                 <div className="d-flex align-items-center">
                   <span className="me-2">Share:</span>
                   <a href="#" className="text-primary me-2">
