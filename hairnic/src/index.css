@@ -1,0 +1,9 @@
+/* src/index.css */
+
+/* Import Bootstrap CSS */
+@import './css/bootstrap.min.css';
+
+/* Import Custom CSS */
+@import './css/style.css';
+
+
