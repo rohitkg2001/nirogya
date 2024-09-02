@@ -1,27 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { ACCENT_COLOR } from "../utils/utils";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
 
-  const goToSignin = () =>{
-    navigate('/sign-in')
-  }
+  const goToSignin = () => {
+    navigate("/sign-in");
+  };
+
   return (
     <div
-      className="container-fluid sticky-top bg-primary shadow-sm"
-      style={{ top: 0 }}
+      className="container-fluid sticky-top shadow-sm"
+      style={{ top: 0, backgroundColor: ACCENT_COLOR }}
     >
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light p-0">
-          <a href="index.html" className="navbar-brand">
-            {/* <h2 className="text-white">Hairnic</h2> */}
-            <img
-              
-              src="img/Nirogya_logo.jpg"
-              alt="Hairnic"
-              className="logo"
-            />
+          <a href="/" className="navbar-brand">
+            <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
           </a>
           <button
             type="button"
@@ -33,23 +29,25 @@ const MyNavbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <div className="navbar-nav ms-auto">
-              <a href="index.html" className="nav-item nav-link active">
-                Home
-              </a>
-              <a href="about.html" className="nav-item nav-link">
-                About
-              </a>
-              <a href="product.html" className="nav-item nav-link">
-                Products
-              </a>
-             
-              <a href="contact.html" className="nav-item nav-link">
-                Contact
+              <form className="d-flex ms-3">
+                <div className="input-group">
+                  <span className="input-group-text bg-white border-end-0">
+                    <i className="fa fa-search" />
+                  </span>
+                  <input
+                    className="form-control border-start-0 search-input"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                </div>
+              </form>
+              <a href="/" className="nav-item nav-link ms-3">
+                <i className="fa fa-cart-shopping position-relative"></i>
               </a>
             </div>
             <button
-              href=""
-              className="btn btn-dark py-2 px-4 d-none d-lg-inline-block"
+              className="btn btn-dark py-2 px-4 d-none d-lg-inline-block ms-3"
               onClick={goToSignin}
             >
               Sign in
