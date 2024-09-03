@@ -3,11 +3,6 @@ const Vendor = require("./vendor.model");
 
 const productSchema = new mongoose.Schema(
   {
-    // hsn_code: {
-    //     type: mongoose.Types.UUID,
-    //     required: true,
-    //     unique: true
-    // },
     SKU: String,
     parent_id: String,
     slug: String,
@@ -15,12 +10,11 @@ const productSchema = new mongoose.Schema(
       type: String,
       lowercase: true,
       minLength: 5,
-      maxLength: 40,
+      maxLength: 100,
       required: true,
     },
     description: String,
     summary: String,
-    // vendor_id: { type: mongoose.Types.ObjectId, ref: Vendor },
     shop_id: String,
     brand_id: String,
     status: Boolean,
@@ -48,7 +42,7 @@ const productSchema = new mongoose.Schema(
     },
     product_type: {
       type: String,
-      enum: ["Shampoo"],
+      enum: ["Shampoo", ""],
       message: "{VALUE} we not selling right now. Please contact admin",
     },
     color: {

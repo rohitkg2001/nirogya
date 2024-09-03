@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCENT_COLOR } from "../utils/utils";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
+import { useSelector } from "react-redux"
 
 const MyNavbar = () => {
   const navigate = useNavigate();
-  const [cartItems, setCartItems] = useState(0); // Example state for cart items
-  const [showPopover, setShowPopover] = useState(false); // State to manage popover visibility
+  const [showPopover, setShowPopover] = useState(false);
+  const cart = useSelector(state => state.cart)
+
+  const [cartItems, setCartItems] = useState(0);
+
+  useEffect(() => {
+    console.log("My cart contains", cart)
+    setCartItems(cart.length);
+  }, [cart])
+
 
   const goToSignin = () => {
     navigate("/sign-in");
@@ -62,65 +71,65 @@ const MyNavbar = () => {
       className="container-fluid sticky-top shadow-sm"
       style={{ top: 0, backgroundColor: ACCENT_COLOR }}
     >
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light p-0">
-          <a href="/" className="navbar-brand">
-            <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
-          </a>
-          <button
-            type="button"
-            className="navbar-toggler ms-auto me-0"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarCollapse">
-            <div className="navbar-nav ms-auto">
-              <form className="d-flex ms-3">
-                <div className="input-group">
-                  <span className="input-group-text bg-white border-end-0">
-                    <i className="fa fa-search" />
-                  </span>
-                  <input
-                    className="form-control border-start-0 search-input"
-                    type="search"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                </div>
-              </form>
-              <div
-                onMouseEnter={() => setShowPopover(true)}
-                onMouseLeave={() => setShowPopover(false)}
-                className="nav-item nav-link ms-3"
-              >
-                <OverlayTrigger
-                  show={showPopover} // Show popover based on state
-                  trigger="manual" // Trigger manually
-                  placement="bottom"
-                  overlay={cartPopover}
-                >
-                  <div style={cartIconStyle}>
-                    <i className="fa fa-cart-shopping position-relative">
-                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                        {cartItems}
-                      </span>
-                    </i>
-                  </div>
-                </OverlayTrigger>
+      {/* <div className="container"> */}
+      <nav className="navbar navbar-expand-lg navbar-light p-0">
+        <a href="/" className="navbar-brand">
+          <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
+        </a>
+        <button
+          type="button"
+          className="navbar-toggler ms-auto me-0"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarCollapse">
+          <div className="navbar-nav ms-auto">
+            <form className="d-flex ms-3">
+              <div className="input-group">
+                <span className="input-group-text bg-white border-end-0">
+                  <i className="fa fa-search" />
+                </span>
+                <input
+                  className="form-control border-start-0 search-input"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                />
               </div>
-            </div>
-            <button
-              className="btn btn-dark py-2 px-4 d-none d-lg-inline-block ms-3"
-              onClick={goToSignin}
+            </form>
+            <div
+              onMouseEnter={() => setShowPopover(true)}
+              onMouseLeave={() => setShowPopover(false)}
+              className="nav-item nav-link ms-3"
             >
-              Sign in
-            </button>
+              <OverlayTrigger
+                show={showPopover} // Show popover based on state
+                trigger="manual" // Trigger manually
+                placement="bottom"
+                overlay={cartPopover}
+              >
+                <div style={cartIconStyle}>
+                  <i className="fa fa-cart-shopping position-relative">
+                    <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      {cartItems}
+                    </span>
+                  </i>
+                </div>
+              </OverlayTrigger>
+            </div>
           </div>
-        </nav>
-      </div>
+          <button
+            className="btn btn-dark py-2 px-4 d-none d-lg-inline-block ms-3"
+            onClick={goToSignin}
+          >
+            Login/Signup
+          </button>
+        </div>
+      </nav>
     </div>
+    // </div>
   );
 };
 

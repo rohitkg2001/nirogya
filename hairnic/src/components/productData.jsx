@@ -1,10 +1,10 @@
 const productData = [
   {
-    id: 1,
+    id: 100,
     name: "Hair Shining Shampoo",
-    price: "₹ 299.99",
-    mrp: "₹ 399.00",
-    brand: "Dove",
+    sale_price: "₹ 299.99",
+    regular_price: "₹ 399.00",
+    brand_id: "1",
     flavor: "gulab",
     itemform: "water",
     image: "img/product-2.png",

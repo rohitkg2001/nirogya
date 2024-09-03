@@ -13,7 +13,7 @@ const HowToUse = () => {
       <div className="container text-white py-5">
         <div
           className="mx-auto text-center wow fadeIn"
-          data-wow-delay="0.1s"
+          // data-wow-delay="0.1s"
           style={{ maxWidth: "600px" }}
         >
           <h1 className="text-white mb-3">
@@ -70,7 +70,7 @@ const HowToUse = () => {
               className="btn-square rounded-circle border mx-auto mb-4"
               style={{ width: "120px", height: "120px" }}
             >
-              <i class="fa-solid fa-plant-wilt fa-3x text-dark"></i>
+              <i className="fa-solid fa-plant-wilt fa-3x text-dark"></i>
             </div>
             <h5 className="text-white">Amla</h5>
             <hr className="w-25 bg-light my-2 mx-auto" />

@@ -12,7 +12,7 @@ import DealsOfTheDay from "../components/DealsOfTheDay";
 import Features from "../components/Features";
 import About from "../components/About";
 import { useDispatch } from "react-redux";
-import { getProducts } from "../redux/actions/actions";
+import { getProducts } from "../redux/actions/productActions";
 
 export default function Home() {
   const dispatch = useDispatch();

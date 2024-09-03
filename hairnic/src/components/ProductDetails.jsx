@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useLocation } from "react-router-dom";
 import productData from "./productData";
 import { Button, Card } from "react-bootstrap";
 import {
@@ -8,13 +8,28 @@ import {
   FaInstagram,
   FaWhatsapp,
 } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const product = productData.find((item) => item.id === parseInt(id));
+  const [product, setProduct] = useState(null)
+  const [base_url, setBaseURL] = useState("")
 
-  // Debugging: Print product data
-  console.log("Product Data:", product);
+  const dispatch = useDispatch()
+  const cart = useSelector(state => state.cart)
+
+  const clickAddCart = () => {
+    dispatch(addToCart(id, cart))
+  }
+
+  useEffect(() => {
+    const thisProduct = productData.find((item) => item.id === parseInt(id))
+    setProduct(thisProduct)
+    const { origin } = window.location
+    setBaseURL(origin)
+  }, [id])
+
 
   const [quantity, setQuantity] = useState(1);
 
@@ -28,12 +43,14 @@ const ProductDetails = () => {
     }
   };
 
+  if (!product) return <div><h5>Not Found</h5></div>
+
   return (
     <div className="container py-5">
       <div className="row">
         <div className="col-md-6 d-flex justify-content-center align-items-center">
           <img
-            src={product.image}
+            src={`${base_url}/${product.image}`}
             alt={product.name}
             className="img-fluid"
             style={{
@@ -88,7 +105,7 @@ const ProductDetails = () => {
             )}
           </div>
           <div className="d-flex mb-3">
-            <Button variant="outline-primary" className="me-2">
+            <Button variant="outline-primary" className="me-2" onClick={clickAddCart}>
               Add To Cart
             </Button>
             <Button variant="primary">Buy Now</Button>
