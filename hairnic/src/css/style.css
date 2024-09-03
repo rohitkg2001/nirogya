@@ -63,6 +63,7 @@ img.animated.pulse {
 }
 
 /*** Navbar ***/
+
 .sticky-top {
   top: -150px;
   transition: 0.5s;
@@ -72,6 +73,37 @@ img.animated.pulse {
   height: 60px;
   width: 150px;
   max-width: 150px;
+}
+
+.input-group {
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.input-group .form-control {
+  border: none;
+  box-shadow: none;
+}
+
+.input-group .input-group-text {
+  border: none;
+}
+
+.input-group .form-control:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
+}
+
+.input-group:hover {
+  box-shadow: 0 0 5px rgba(255, 193, 7, 0.904);
+}
+
+.input-group .form-control:hover {
+  box-shadow: none;
+}
+
+.input-group .input-group-text:hover {
+  background-color: rgba(39, 40, 41, 0.123);
 }
 
 .navbar {
@@ -93,13 +125,21 @@ img.animated.pulse {
   color: var(--bs-dark);
 }
 
-.navbar .dropdown-toggle::after {
-  border: none;
-  content: "\f107";
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
-  vertical-align: middle;
-  margin-left: 8px;
+.nav-item.nav-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.123);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  color: white;
+  padding: 5px;
+  position: relative;
+}
+
+.nav-item.nav-link:hover {
+  background-color: #eb8c11;
 }
 
 @media (max-width: 991.98px) {

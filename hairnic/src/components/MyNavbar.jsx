@@ -1,27 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ACCENT_COLOR } from "../utils/utils";
+import { Popover, OverlayTrigger, Button } from "react-bootstrap";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
+  const [cartItems, setCartItems] = useState(0); // Example state for cart items
+  const [showPopover, setShowPopover] = useState(false); // State to manage popover visibility
 
-  const goToSignin = () =>{
-    navigate('/sign-in')
-  }
+  const goToSignin = () => {
+    navigate("/sign-in");
+  };
+
+  // Adjusted popover size
+  const popoverStyle = {
+    width: "300px",
+    maxHeight: "400px",
+    overflowY: "auto",
+    cursor: "default",
+  };
+
+  const cartPopover = (
+    <Popover id="cart-popover" style={popoverStyle}>
+      <Popover.Header as="h3">Cart</Popover.Header>
+      <Popover.Body>
+        <div className="d-flex flex-column">
+          <div className="d-flex justify-content-between mb-2">
+            <span>{cartItems} Items</span>
+          </div>
+          <hr />
+          <div className="d-flex justify-content-between mb-2">
+            <span>Total: $0.00</span>
+          </div>
+          <hr />
+          <div className="d-flex justify-content-end">
+            <Button variant="primary" onClick={() => navigate("/checkout")}>
+              Checkout
+            </Button>
+          </div>
+        </div>
+      </Popover.Body>
+    </Popover>
+  );
+
+  // Styles for the cart icon
+  const cartIconStyle = {
+    width: "40px",
+    height: "40px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: "50%",
+    backgroundColor: "#fff", // Background color of the circle
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", // Optional shadow for a 3D effect
+    position: "relative",
+    cursor: "pointer",
+  };
+
   return (
     <div
-      className="container-fluid sticky-top bg-primary shadow-sm"
-      style={{ top: 0 }}
+      className="container-fluid sticky-top shadow-sm"
+      style={{ top: 0, backgroundColor: ACCENT_COLOR }}
     >
       <div className="container">
         <nav className="navbar navbar-expand-lg navbar-light p-0">
-          <a href="index.html" className="navbar-brand">
-            {/* <h2 className="text-white">Hairnic</h2> */}
-            <img
-              
-              src="img/Nirogya_logo.jpg"
-              alt="Hairnic"
-              className="logo"
-            />
+          <a href="/" className="navbar-brand">
+            <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
           </a>
           <button
             type="button"
@@ -33,23 +77,42 @@ const MyNavbar = () => {
           </button>
           <div className="collapse navbar-collapse" id="navbarCollapse">
             <div className="navbar-nav ms-auto">
-              <a href="index.html" className="nav-item nav-link active">
-                Home
-              </a>
-              <a href="about.html" className="nav-item nav-link">
-                About
-              </a>
-              <a href="product.html" className="nav-item nav-link">
-                Products
-              </a>
-             
-              <a href="contact.html" className="nav-item nav-link">
-                Contact
-              </a>
+              <form className="d-flex ms-3">
+                <div className="input-group">
+                  <span className="input-group-text bg-white border-end-0">
+                    <i className="fa fa-search" />
+                  </span>
+                  <input
+                    className="form-control border-start-0 search-input"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                </div>
+              </form>
+              <div
+                onMouseEnter={() => setShowPopover(true)}
+                onMouseLeave={() => setShowPopover(false)}
+                className="nav-item nav-link ms-3"
+              >
+                <OverlayTrigger
+                  show={showPopover} // Show popover based on state
+                  trigger="manual" // Trigger manually
+                  placement="bottom"
+                  overlay={cartPopover}
+                >
+                  <div style={cartIconStyle}>
+                    <i className="fa fa-cart-shopping position-relative">
+                      <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {cartItems}
+                      </span>
+                    </i>
+                  </div>
+                </OverlayTrigger>
+              </div>
             </div>
             <button
-              href=""
-              className="btn btn-dark py-2 px-4 d-none d-lg-inline-block"
+              className="btn btn-dark py-2 px-4 d-none d-lg-inline-block ms-3"
               onClick={goToSignin}
             >
               Sign in

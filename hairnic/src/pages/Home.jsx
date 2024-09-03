@@ -15,13 +15,13 @@ import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/actions/actions";
 
 export default function Home() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
     const fetchProds = async () => {
-      await dispatch(getProducts())
-    }
-    fetchProds()
-  }, [])
+      await dispatch(getProducts());
+    };
+    fetchProds();
+  }, []);
 
   return (
     <>
