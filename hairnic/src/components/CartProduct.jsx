@@ -48,6 +48,17 @@ const CartProduct = () => {
                 sale_price={sale_price}
               />
             )
+          {productData.map(({ id, image, name, rating, reviews, regular_price, sale_price } = product, index) =>
+            <ProductCard
+              key={index}
+              id={id}
+              image={image} 
+              name={name}
+              rating={rating}
+              reviews={reviews}
+              regular_price={regular_price}
+              sale_price={sale_price}
+            />
           )}
         </div>
         {/* </div> */}
