@@ -28,7 +28,7 @@ const CartProduct = () => {
             <ProductCard
               key={index}
               id={id}
-              image={image}
+              image={image} 
               name={name}
               rating={rating}
               reviews={reviews}
