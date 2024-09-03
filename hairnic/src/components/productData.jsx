@@ -22,6 +22,9 @@ const productData = [
     image: "img/dabar2.png",
     rating: 5,
     weight: 1,
+    brand: "",
+    flavor: "",
+    itemform: "",
     description:
       "Dabur Chyawanprash is a clinically tested Ayurvedic formulation of more than 41 Ayurvedic herbs that aid in boosting the immune system, thereby protecting the body from everyday infections like cough & cold etc. caused by bacteria, viruses, dust and weather",
     reviews: 99,
@@ -35,6 +38,9 @@ const productData = [
     rating: 5,
     reviews: 99,
     weight: 1,
+    brand: "",
+    flavor: "",
+    itemform: "",
   },
   {
     id: 4,
@@ -44,6 +50,9 @@ const productData = [
     image: "img/product-2.png",
     rating: 5,
     reviews: 99,
+    brand: "",
+    flavor: "",
+    itemform: "",
   },
   // Add more products as needed
 ];
