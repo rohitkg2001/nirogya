@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import productData from "./productData";
 import { Button, Card } from "react-bootstrap";
@@ -7,11 +7,29 @@ import {
   FaTwitter,
   FaInstagram,
   FaWhatsapp,
+  FaShoppingCart,
+  FaBolt,
 } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/actions/cartActions";
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const product = productData.find((item) => item.id === parseInt(id));
+  const [product, setProduct] = useState(null);
+  const [base_url, setBaseURL] = useState("");
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => state.cart);
+
+  const clickAddCart = () => {
+    dispatch(addToCart(id, cart));
+  };
+
+  useEffect(() => {
+    const thisProduct = productData.find((item) => item.id === parseInt(id));
+    setProduct(thisProduct);
+    const { origin } = window.location;
+    setBaseURL(origin);
+  }, [id]);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -25,58 +43,103 @@ const ProductDetails = () => {
     }
   };
 
+  const similarProducts = productData.filter(
+    (item) => item.id !== parseInt(id)
+  );
+
+  if (!product)
+    return (
+      <div>
+        <h5>Not Found</h5>
+      </div>
+    );
+
   return (
     <div className="container py-5">
       <div className="row">
-        <div className="col-md-5">
-          <div className="product-image-container">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="img-fluid"
-              style={{
-                maxWidth: "100%",
-                maxHeight: "500px",
-                objectFit: "contain",
-              }}
-            />
+        {/* Product Image */}
+        <div className="col-md-6 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
+          {/* Featured Label */}
+          <div
+            className="position-absolute top-0 start-0 bg-warning text-dark px-3 py-1"
+            style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
+          >
+            Featured
           </div>
+
+          <img
+            src={`${base_url}/${product.image}`}
+            alt={product.name}
+            className="img-fluid"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "450px",
+              objectFit: "contain",
+            }}
+          />
         </div>
-        <div className="col-md-7">
-          <h3>{product.name}</h3>
-          {/* <div className="text-muted mb-2">
-            <small>15,273 Ratings & 826 Reviews</small>
-          </div> */}
-          {/* <h4 className="text-success">Extra ₹5000 off</h4> */}
-          <h3 className="text-danger">
-            {product.price}
-            <span
-              className="text-muted"
-              style={{ textDecoration: "line-through", marginLeft: "10px" }}
+
+        {/* Product Details */}
+        <div className="col-md-6">
+          <h4>{product.name}</h4>
+          <div className="my-3">
+            <h6 className="text-muted">
+              M.R.P: <s>{product.mrp}</s>
+            </h6>
+            <h5 className="text-success">Price: {product.price} </h5>
+            <small className="text-muted">Inclusive of all taxes</small>
+          </div>
+
+          <h6 className="text-muted">Weight: {product.weight} Ml</h6>
+
+          {/* Product Description */}
+          <div className="my-3">
+            <p>{product.description}</p>
+          </div>
+
+          {/* Quantity Adjustment */}
+          <div className="d-flex align-items-center mb-3">
+            <span className="me-2">Quantity:</span> {}
+            <Button
+              style={{
+                backgroundColor: "orange",
+                borderColor: "orange",
+                color: "white",
+              }}
+              onClick={decreaseQuantity}
+              className="me-2"
             >
-              {product.mrp}
-            </span>
-            {/* <span className="text-success" style={{ marginLeft: "10px" }}>
-              22% off
-            </span> */}
-          </h3>
-          <p className="text-muted">Inclusive of all taxes</p>
-          <h6>Available offers:</h6>
-          <ul className="text-muted">
-            <li>
-              Bank Offer 5% Unlimited Cashback on Flipkart Axis Bank Credit Card
-            </li>
-            <li>
-              Bank Offer ₹1500 Off On All Banks Credit and Debit Card
-              Transactions
-            </li>
-            <li>Bank Offer ₹1500 Off On HDFC Bank Debit Card Transactions</li>
-            <li>
-              Special Price Get extra ₹5000 off (price inclusive of
-              cashback/coupon)
-            </li>
-          </ul>
-          <div className="my-5">
+              -
+            </Button>
+            <span className="me-2">{quantity}</span>
+            <Button
+              style={{
+                backgroundColor: "orange",
+                borderColor: "orange",
+                color: "white",
+              }}
+              onClick={increaseQuantity}
+            >
+              +
+            </Button>
+          </div>
+
+          {/* Add to Cart and Buy Now Buttons */}
+          <div className="d-flex mb-3">
+            <Button
+              variant="outline-primary"
+              className="me-2"
+              onClick={clickAddCart}
+            >
+              <FaShoppingCart className="me-2" /> Add To Cart
+            </Button>
+            <Button className="bg-warning text-white">
+              <FaBolt className="me-2" /> Buy Now
+            </Button>
+          </div>
+
+          {/* Reviews Section */}
+          <div className="my-4">
             <h4>Reviews</h4>
             {product.reviews.length > 0 ? (
               product.reviews.map((review, index) => (
@@ -94,26 +157,8 @@ const ProductDetails = () => {
               <p>No reviews yet.</p>
             )}
           </div>
-          <div className="d-flex align-items-center mb-3">
-            <Button
-              variant="outline-secondary"
-              onClick={decreaseQuantity}
-              className="me-2"
-            >
-              -
-            </Button>
-            <span className="me-2">{quantity}</span>
-            <Button variant="outline-secondary" onClick={increaseQuantity}>
-              +
-            </Button>
-          </div>
 
-          <div className="d-flex mb-3">
-            <Button variant="warning" className="me-2">
-              Add To Cart
-            </Button>
-            <Button variant="danger">Buy Now</Button>
-          </div>
+          {/* Share Section */}
           <div className="d-flex align-items-center mt-5">
             <span className="me-2">Share:</span>
             <a href="#" className="text-primary me-2">
@@ -130,6 +175,52 @@ const ProductDetails = () => {
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Similar Products Section */}
+      <hr className="my-5" />
+      <h4 className="mb-4">Customers who viewed this item also viewed</h4>
+      <div className="row">
+        {similarProducts.slice(0, 4).map((item) => (
+          <div key={item.id} className="col-md-3 mb-4">
+            <Card className="h-100 position-relative">
+              {/* Offer Label */}
+              <div
+                className="position-absolute top-0 start-0 bg-warning text-dark px-2 py-1"
+                style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
+              >
+                Offer
+              </div>
+
+              <Card.Img
+                variant="top"
+                src={`${base_url}/${item.image}`}
+                alt={item.name}
+                style={{
+                  height: "150px",
+                  width: "100%",
+                  objectFit: "contain",
+                  padding: "10px",
+                }}
+              />
+              <Card.Body className="d-flex flex-column">
+                <Card.Title>{item.name}</Card.Title>
+                <Card.Text className="text-muted">
+                  Price: {item.price}
+                </Card.Text>
+                <Button
+                  variant="primary"
+                  className="mt-auto"
+                  onClick={() => {
+                    window.location.href = `/product/${item.id}`;
+                  }}
+                >
+                  View Details
+                </Button>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
       </div>
     </div>
   );

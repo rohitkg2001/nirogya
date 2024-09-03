@@ -31,37 +31,7 @@ const userSchema = new mongoose.Schema(
     },
     image_url: {
       type: String, // path to image
-    },
-    loginActivities: [
-      {
-        description: {
-          type: String,
-          enum: ["Successful Login", "Successful Logout"],
-        },
-        browserType: {
-          type: String, // e.g., Chrome, Firefox
-          enum: [
-            "Google Chrome",
-            "Firefox",
-            "Microsoft Edge",
-            "Opera",
-            "Samsung Internet",
-            "Internet Explorer",
-            "UC Browser",
-          ],
-        },
-        platform: {
-          type: String,
-        },
-        ipAddress: {
-          type: String,
-        },
-        loggedAt: {
-          type: Date, // Timestamp of login/logout
-          default: Date.now,
-        },
-      },
-    ],
+    }
   },
   {
     timestamps: true,

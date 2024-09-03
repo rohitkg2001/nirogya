@@ -1,10 +1,10 @@
 const productData = [
   {
-    id: 1,
+    id: 100,
     name: "Hair Shining Shampoo",
-    price: "₹ 299.99",
-    mrp: "₹ 399.00",
-    brand: "Dove",
+    sale_price: "₹ 299.99",
+    regular_price: "₹ 399.00",
+    brand_id: "1",
     flavor: "gulab",
     itemform: "water",
     image: "img/product-2.png",
@@ -17,14 +17,13 @@ const productData = [
   {
     id: 2,
     name: "Dabur Chyawanprash",
-    price: "₹ 249.99",
-    mrp: "₹ 300.00",
+    sale_price: "₹ 459.99",
+    regular_price: "₹ 599.00",
+    brand_id: "2",
     image: "img/dabar2.png",
     rating: 5,
     weight: 1,
-    brand: "",
-    flavor: "",
-    itemform: "",
+
     description:
       "Dabur Chyawanprash is a clinically tested Ayurvedic formulation of more than 41 Ayurvedic herbs that aid in boosting the immune system, thereby protecting the body from everyday infections like cough & cold etc. caused by bacteria, viruses, dust and weather",
     reviews: 99,
@@ -32,8 +31,9 @@ const productData = [
   {
     id: 3,
     name: "Anti Hair Fall Shampoo",
-    price: "₹ 455.99",
-    mrp: "₹ 599.00",
+    sale_price: "₹ 335.99",
+    regular_price: "₹ 459.00",
+    brand_id: "1",
     image: "img/product-2.png",
     rating: 5,
     reviews: 99,
@@ -45,8 +45,8 @@ const productData = [
   {
     id: 4,
     name: "Hair Growing Shampoo",
-    price: "₹ 600.99",
-    mrp: "₹ 640.00",
+    sale_price: "₹ 295.99",
+    regular_price: "₹ 339.00",
     image: "img/product-2.png",
     rating: 5,
     reviews: 99,
