@@ -427,8 +427,32 @@ img.animated.pulse {
   border-right: none;
 }
 
-/* deals of the day */
 
-.col-lg-6 {
-  background-color: transparent; /* Remove any background color */
+.card {
+  border-radius: 10px;
+}
+.card-header {
+  background-color: #f8f9fa;
+}
+.table thead th {
+  background-color: #e9ecef;
+}
+
+.fist{
+  display: flex;
+}
+
+.box1{
+  display:flex;
+}
+.box2{
+  position: absolute;
+}
+.box3{
+  margin-left: 350px;
+  position: absolute;
+}
+
+.box4{
+  margin-left: 770px;
 }

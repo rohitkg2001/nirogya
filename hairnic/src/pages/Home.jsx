@@ -13,6 +13,11 @@ import Features from "../components/Features";
 import About from "../components/About";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/actions/actions";
+import CheckoutSidebar from "../components/CheckoutSidebar";
+
+
+
+
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -25,7 +30,8 @@ export default function Home() {
 
   return (
     <>
-      <MyNavbar />
+    <CheckoutSidebar/>
+      {/* <MyNavbar />
       <Hero />
       <Features />
       <About />
@@ -36,7 +42,7 @@ export default function Home() {
       <Testimonial />
       <BlogArticle />
       <Contact />
-      <Footer />
+      <Footer /> */}
     </>
   );
 }
