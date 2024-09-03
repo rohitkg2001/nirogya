@@ -4,9 +4,12 @@ const productData = [
     name: "Hair Shining Shampoo",
     price: "₹ 299.99",
     mrp: "₹ 399.00",
-    image: "img/product-1.png",
+    brand: "Dove",
+    flavor: "gulab",
+    itemform: "water",
+    image: "img/product-2.png",
     rating: 5,
-    Weight: 55,
+    weight: 100,
     description:
       "Patanjali Kesh Kanti Aloe Vera Hair Cleanser is a gentle formula containing aloe vera, phyto-proteins, and ceramide-3 to provide delicate care for your hair. It deeply conditions and nourishes both your hair and scalp.",
     reviews: 99,
@@ -18,7 +21,7 @@ const productData = [
     mrp: "₹ 300.00",
     image: "img/dabar2.png",
     rating: 5,
-    Weight: 100,
+    weight: 1,
     description:
       "Dabur Chyawanprash is a clinically tested Ayurvedic formulation of more than 41 Ayurvedic herbs that aid in boosting the immune system, thereby protecting the body from everyday infections like cough & cold etc. caused by bacteria, viruses, dust and weather",
     reviews: 99,
@@ -31,6 +34,7 @@ const productData = [
     image: "img/product-2.png",
     rating: 5,
     reviews: 99,
+    weight: 1,
   },
   {
     id: 4,

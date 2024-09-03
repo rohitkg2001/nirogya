@@ -3,6 +3,7 @@ import "./css/bootstrap.min.css";
 import "./css/style.css";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
+import ProductDetails from "./components/ProductDetails";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sign-in" element={<Signin />} />
+        <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
     </Router>
   );
