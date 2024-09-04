@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Card, Form, Button, Col, Row } from "react-bootstrap";
+import { Card, Form, Button, Table, Row, Col } from "react-bootstrap";
 import MyNavbar from "../components/MyNavbar";
 import Footer from "../components/Footer";
 
 const Checkout = () => {
-  const [errors, setErrors] = useState({});
+  const [quantity1, setQuantity1] = useState(1);
+  const [quantity2, setQuantity2] = useState(1);
+
   const [formValues, setFormValues] = useState({
     firstName: "",
     lastName: "",
@@ -15,11 +17,34 @@ const Checkout = () => {
     zipCode: "",
     phone: "",
     email: "",
-    createAccount: false,
-    shipDifferentAddress: false,
-    paymentMethod: "",
     termsAndConditions: false,
   });
+
+  const [errors, setErrors] = useState({});
+
+  const increaseQuantity1 = () => {
+    setQuantity1(quantity1 + 1);
+  };
+
+  const decreaseQuantity1 = () => {
+    if (quantity1 > 1) {
+      setQuantity1(quantity1 - 1);
+    }
+  };
+
+  const increaseQuantity2 = () => {
+    setQuantity2(quantity2 + 1);
+  };
+
+  const decreaseQuantity2 = () => {
+    if (quantity2 > 1) {
+      setQuantity2(quantity2 - 1);
+    }
+  };
+
+  // Prices for the products
+  const price1 = 129.9;
+  const price2 = 115.7;
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,32 +54,148 @@ const Checkout = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let newErrors = {};
+  const validateForm = () => {
+    const newErrors = {};
 
-
-    if (!formValues.firstName) newErrors.firstName = "First Name is required";
-    if (!formValues.lastName) newErrors.lastName = "Last Name is required";
-    if (!formValues.zipCode) newErrors.zipCode = "Postcode / ZIP is required";
-    if (!formValues.email) newErrors.email = "Email Address is required";
+    if (!formValues.firstName) newErrors.firstName = "First name is required";
+    if (!formValues.lastName) newErrors.lastName = "Last name is required";
+    if (!formValues.zipCode) newErrors.zipCode = "ZIP code is required";
+    if (!formValues.email) newErrors.email = "Email is required";
     if (!formValues.termsAndConditions)
       newErrors.termsAndConditions = "You must accept the terms and conditions";
 
-    setErrors(newErrors);
+    return newErrors;
+  };
 
-    if (Object.keys(newErrors).length === 0) {
-      console.log("Form submitted successfully:", formValues);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+    } else {
+      // Handle form submission
+      console.log("Form Submitted", formValues);
     }
   };
- 
+
   return (
     <div>
       <MyNavbar />
-      <div className="container py-5">
+      <div className="container-fluid container-md px-2 px-sm-3 px-md-4 py-3 py-md-5">
         <div className="row">
+          {/* Product Table */}
+          <div className="col-12 mb-4">
+            <Table striped bordered hover>
+              <thead style={{ backgroundColor: "#8BC34A", color: "white" }}>
+                <tr>
+                  <th>Product name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <img
+                      src="img/shampoo-1.png"
+                      alt="Shampoo"
+                      width="50"
+                      height="50"
+                      className="mr-2"
+                    />
+                    Hairnic Shampoo
+                    <br />
+                    <small>
+                      Hairnic Shampoo nourishes and revitalizes hair for a
+                      healthy, shiny look.
+                    </small>
+                  </td>
+                  <td>₹{price1.toFixed(2)}</td>
+                  <td className="d-flex align-items-center justify-content-center">
+                    <Button
+                      onClick={decreaseQuantity1}
+                      variant="outline-secondary"
+                    >
+                      -
+                    </Button>
+                    <span className="mx-2">{quantity1}</span>
+                    <Button
+                      onClick={increaseQuantity1}
+                      variant="outline-secondary"
+                    >
+                      +
+                    </Button>
+                  </td>
+                  <td>₹{(price1 * quantity1).toFixed(2)}</td>
+                </tr>
+                <tr>
+                  <td>
+                    <img
+                      src="img/kerala1.png"
+                      width="50"
+                      height="50"
+                      alt="Bell Pepper"
+                      className="mr-2"
+                    />
+                    Kerala Ayurveda
+                    <br />
+                    <small>
+                      Kerala Ayurveda provides authentic Ayurvedic treatments
+                      and products.
+                    </small>
+                  </td>
+                  <td>₹{price2.toFixed(2)}</td>
+                  <td className="d-flex align-items-center justify-content-center">
+                    <Button
+                      onClick={decreaseQuantity2}
+                      variant="outline-secondary"
+                    >
+                      -
+                    </Button>
+                    <span className="mx-2">{quantity2}</span>
+                    <Button
+                      onClick={increaseQuantity2}
+                      variant="outline-secondary"
+                    >
+                      +
+                    </Button>
+                  </td>
+                  <td>₹{(price2 * quantity2).toFixed(2)}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
+
+          {/* Coupon Code Section */}
+          <div className="col-md-3 mb-4">
+            <Card>
+              <Card.Body>
+                <Card.Title>Coupon Code</Card.Title>
+                <Form>
+                  <Form.Group controlId="couponCode">
+                    <Form.Control
+                      type="text"
+                      placeholder="Enter your coupon code"
+                    />
+                  </Form.Group>
+                  <Button
+                    variant="success"
+                    style={{
+                      backgroundColor: "#8BC34A",
+                      borderColor: "#8BC34A",
+                    }}
+                    className="mt-2"
+                  >
+                    Apply Coupon
+                  </Button>
+                </Form>
+              </Card.Body>
+            </Card>
+          </div>
+
           {/* Billing Details Section */}
-          <div className="col-md-8 mb-4">
+          <div className="col-md-6 mb-4">
             <h4>Billing Details</h4>
             <Form onSubmit={handleSubmit}>
               <Row>
@@ -170,10 +311,11 @@ const Checkout = () => {
                     <Form.Label>Phone</Form.Label>
                     <Form.Control
                       type="text"
-                      placeholder="Phone"
+                      placeholder="Phone number"
                       name="phone"
                       value={formValues.phone}
                       onChange={handleChange}
+                      required
                     />
                   </Form.Group>
                 </Col>
@@ -182,7 +324,7 @@ const Checkout = () => {
                     <Form.Label>Email Address</Form.Label>
                     <Form.Control
                       type="email"
-                      placeholder="Email Address"
+                      placeholder="Email"
                       name="email"
                       value={formValues.email}
                       onChange={handleChange}
@@ -195,83 +337,53 @@ const Checkout = () => {
                   </Form.Group>
                 </Col>
               </Row>
-
-              <Form.Group controlId="options">
-                <Form.Check
-                  type="radio"
-                  label="Create an Account?"
-                  name="createAccount"
-                  checked={formValues.createAccount}
-                  onChange={handleChange}
-                  id="createAccount"
-                />
-                <Form.Check
-                  type="radio"
-                  label="Ship to different address"
-                  name="shipDifferentAddress"
-                  checked={formValues.shipDifferentAddress}
-                  onChange={handleChange}
-                  id="shipDifferentAddress"
-                />
-              </Form.Group>
-
-              <Form.Group controlId="termsAndConditions">
-                <Form.Check
-                  type="checkbox"
-                  label="I have read and accept the terms and conditions"
-                  name="termsAndConditions"
-                  checked={formValues.termsAndConditions}
-                  onChange={handleChange}
-                  isInvalid={!!errors.termsAndConditions}
-                />
-                <Form.Control.Feedback type="invalid">
-                  {errors.termsAndConditions}
-                </Form.Control.Feedback>
-              </Form.Group>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Form>
           </div>
 
-          {/* Cart Totals and Payment Method Section */}
-          <div className="col-md-4">
+          {/* Cart Totals Section */}
+          <div className="col-md-3 mb-4">
             <Card>
               <Card.Body>
-                <h4>Cart Total</h4>
-                <ul className="list-unstyled">
-                  <li>
-                    <strong>Subtotal:</strong> ₹200.60
-                  </li>
-                  <li>
-                    <strong>Delivery:</strong> ₹0.00
-                  </li>
-                  <li>
-                    <strong>Discount:</strong> ₹30.00
-                  </li>
-                  <li>
-                    <strong>Total:</strong> ₹170.00
-                  </li>
-                </ul>
+                <Card.Title>Cart Totals</Card.Title>
+                <Table borderless>
+                  <tbody>
+                    <tr>
+                      <td>Subtotal</td>
+                      <td>
+                        ₹{(price1 * quantity1 + price2 * quantity2).toFixed(2)}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Shipping</td>
+                      <td>Free</td>
+                    </tr>
+                    <tr>
+                      <td>Total</td>
+                      <td>
+                        ₹{(price1 * quantity1 + price2 * quantity2).toFixed(2)}
+                      </td>
+                    </tr>
+                  </tbody>
+                </Table>
+              </Card.Body>
+            </Card>
 
-                <hr />
-
-                <h4>Payment Method</h4>
+            {/* Payment Method Section */}
+            <Card className="mt-4">
+              <Card.Body>
+                <Card.Title>Payment Method</Card.Title>
                 <Form>
                   <Form.Check
-                    type="radio"
-                    label="Cash on Delivery"
+                    type="checkbox"
                     name="paymentMethod"
-                    id="cashOnDelivery"
-                    value="cashOnDelivery"
-                    onChange={handleChange}
+                    label="Pay on Delivery"
                   />
+                </Form>
+                <Form.Group controlId="termsAndConditions">
                   <Form.Check
                     type="checkbox"
-                    label="I have read and accept the terms and conditions"
+                    label="I agree to the terms and conditions"
                     name="termsAndConditions"
-                    id="termsAndConditions"
                     checked={formValues.termsAndConditions}
                     onChange={handleChange}
                     isInvalid={!!errors.termsAndConditions}
@@ -279,21 +391,27 @@ const Checkout = () => {
                   <Form.Control.Feedback type="invalid">
                     {errors.termsAndConditions}
                   </Form.Control.Feedback>
+                </Form.Group>
 
+                <div className="text-center mt-3">
                   <Button
-                    variant="primary"
-                    className="mt-3 w-100"
+                    variant="success"
                     type="submit"
+                    style={{
+                      backgroundColor: "#8BC34A",
+                      borderColor: "#8BC34A",
+                      height: "40px",
+
+                    }} 
                   >
-                    Place an order
+                    Place Order
                   </Button>
-                </Form>
+                </div>
               </Card.Body>
             </Card>
           </div>
         </div>
       </div>
-      <hr />
       <Footer />
     </div>
   );
