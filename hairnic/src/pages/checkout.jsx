@@ -33,7 +33,6 @@ const Checkout = () => {
     e.preventDefault();
     let newErrors = {};
 
-
     if (!formValues.firstName) newErrors.firstName = "First Name is required";
     if (!formValues.lastName) newErrors.lastName = "Last Name is required";
     if (!formValues.zipCode) newErrors.zipCode = "Postcode / ZIP is required";
@@ -47,7 +46,7 @@ const Checkout = () => {
       console.log("Form submitted successfully:", formValues);
     }
   };
- 
+
   return (
     <div>
       <MyNavbar />

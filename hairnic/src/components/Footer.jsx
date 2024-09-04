@@ -1,13 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Footer = () => {
+  const [baseURL, setBaseURL] = useState("");
+
+  useEffect(() => {
+    const { origin } = window.location;
+    setBaseURL(origin);
+  }, []);
+
   return (
     <div className="container-fluid footer py-4">
       <div className="row g-5 px-4">
         <div className="col-sm-6 col-md-6 col-lg-3">
           <a href="/" className="d-inline-block mb-3">
             <img
-              src="img/nirogya_logo_brand.png"
+              src={`${baseURL}/img/nirogya_logo_brand.png`}
               alt="Nirogya Ayurveda Logo"
               aria-label="Nirogya Ayurveda Logo"
               className="logo"
@@ -78,8 +85,6 @@ const Footer = () => {
             </a>
           </div>
         </div>
-
-        <div className="col-md-6 col-lg-3"></div>
       </div>
 
       <div className="d-flex mt-2 mb-0 bg-primary">

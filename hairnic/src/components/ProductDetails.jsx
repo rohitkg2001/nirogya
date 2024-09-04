@@ -80,6 +80,7 @@ const ProductDetails = () => {
                 maxWidth: "100%",
                 maxHeight: "450px",
                 objectFit: "contain",
+               
               }}
             />
           </div>
@@ -194,7 +195,7 @@ const ProductDetails = () => {
                   className="position-absolute top-0 start-0 bg-warning text-dark px-2 py-1"
                   style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
                 >
-                  Offer
+                  % Off
                 </div>
 
                 <Card.Img

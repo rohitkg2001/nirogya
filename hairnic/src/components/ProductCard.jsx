@@ -30,7 +30,7 @@ export default function ProductCard({
   return (
     <>
       <div className="col-md-6 col-lg-3 wow fadeIn" key={id}>
-        <div className="product-item text-center border h-100 p-0 position-relative rounded">
+        <div className="product-item text-center border h-100 p-0 position-relative">
           {/* Left-side discount label */}
           <div
             className="position-absolute top-0 start-0 bg-warning text-dark px-2 py-1"
@@ -59,7 +59,7 @@ export default function ProductCard({
             className="img-fluid mb-4"
             src={image}
             alt={name}
-            style={{ maxWidth: "200px", height: "200px" }}
+            style={{ maxWidth: "200px", height: "200px", marginTop: "30px" }}
           />
 
           {/* Product Name and Review Stars */}
