@@ -2,20 +2,19 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCENT_COLOR } from "../utils/utils";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
   const [showPopover, setShowPopover] = useState(false);
-  const cart = useSelector(state => state.cart)
+  const cart = useSelector((state) => state.cart);
 
   const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
-    console.log("My cart contains", cart)
+    console.log("My cart contains", cart);
     setCartItems(cart.length);
-  }, [cart])
-
+  }, [cart]);
 
   const goToSignin = () => {
     navigate("/sign-in");
@@ -39,7 +38,7 @@ const MyNavbar = () => {
           </div>
           <hr />
           <div className="d-flex justify-content-between mb-2">
-            <span>Total: $0.00</span>
+            <span>Total: ₹ 0.00</span>
           </div>
           <hr />
           <div className="d-flex justify-content-end">
@@ -74,8 +73,9 @@ const MyNavbar = () => {
       {/* <div className="container"> */}
       <nav className="navbar navbar-expand-lg navbar-light p-0">
         <a href="/" className="navbar-brand">
-          <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
+          <img src="img/Nirogya_logo.jpg" alt="Nirogya" className="logo" />
         </a>
+
         <button
           type="button"
           className="navbar-toggler ms-auto me-0"
@@ -105,8 +105,8 @@ const MyNavbar = () => {
               className="nav-item nav-link ms-3"
             >
               <OverlayTrigger
-                show={showPopover} // Show popover based on state
-                trigger="manual" // Trigger manually
+                show={showPopover}
+                trigger="manual"
                 placement="bottom"
                 overlay={cartPopover}
               >
