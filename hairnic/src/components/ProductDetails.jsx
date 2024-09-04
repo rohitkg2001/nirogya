@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import productData from "./productData";
 import { Button, Card } from "react-bootstrap";
 import MyNavbar from "../components/MyNavbar";
+import Footer from "../components/Footer";
 import {
   FaFacebookF,
   FaTwitter,
@@ -59,7 +60,6 @@ const ProductDetails = () => {
     <div>
       {/* Include the Navbar at the top */}
       <MyNavbar />
-
       <div className="container py-5">
         <div className="row">
           {/* Product Image */}
@@ -228,6 +228,8 @@ const ProductDetails = () => {
           ))}
         </div>
       </div>
+      <hr />
+      <Footer />
     </div>
   );
 };
