@@ -23,9 +23,9 @@ const CartProduct = () => {
             produced by life, and includes the likes of biotic materials.
           </p>
         </div>
-        <div className="row g-4">
+        <div className="row g-3 img ">
           {productData.map(({ id, image, name, rating, reviews, regular_price, sale_price } = product, index) =>
-            <ProductCard
+            <ProductCard 
               key={index}
               id={id}
               image={image}

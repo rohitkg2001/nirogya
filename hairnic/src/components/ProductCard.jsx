@@ -17,9 +17,9 @@ export default function ProductCard({ id, image, name, rating, reviews, regular_
             className="col-md-6 col-lg-3 wow fadeIn"
             key={id}
         >
-            <div className="product-item text-center border h-100 p-4">
+            <div className="product-item text-center border h-100 p-1">
                 <img
-                    className="img-fluid mb-4"
+                    className="img-fluid mb-4 img-box"
                     src={image}
                     alt={name}
                 />
@@ -45,14 +45,15 @@ export default function ProductCard({ id, image, name, rating, reviews, regular_
                 <div className="d-flex justify-content-center">
                     <Button
                         variant="outline-primary"
+                     
                         size="sm"
-                        className="px-3 me-2"
+                        className="px-5 me-3 "
                         onClick={clickAddCart}
                     >
                         Add To Cart
                     </Button>
                     <Link to={`/product/${id}`}>
-                        <Button variant="primary" size="sm" className="px-3">
+                        <Button variant="primary" size="sm" className="px-5 me-3">
                             View Details
                         </Button>
                     </Link>

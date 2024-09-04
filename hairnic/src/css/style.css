@@ -472,3 +472,34 @@ img.animated.pulse {
 .col-lg-6 {
   background-color: transparent; /* Remove any background color */
 }
+
+.img-box{
+  height: 200px;
+}
+
+.fromNumer{
+ display:flex;
+  gap: 10px;
+}
+
+.mk-1{
+  display:flex;
+  gap: 10px;
+}
+.row-from2{
+  margin-top: 10px;
+}
+
+.row-from1{
+  margin-top: 30px;
+}
+
+.row-from3{
+  margin-top: 30px;
+}
+
+.row-from5{
+  display:flex;
+  gap: 10px;
+  margin-top: 30px;
+}

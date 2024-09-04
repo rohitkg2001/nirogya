@@ -7,7 +7,7 @@ const productData = [
     brand_id: "1",
     flavor: "gulab",
     itemform: "water",
-    image: "img/product-2.png",
+    image: "img/product-2.png ",
     rating: 5,
     weight: 100,
     description:
@@ -17,6 +17,7 @@ const productData = [
   {
     id: 2,
     name: "Dabur Chyawanprash",
+    sale_price: "₹ 299.99",
     price: "₹ 249.99",
     mrp: "₹ 300.00",
     image: "img/dabar2.png",
@@ -29,6 +30,7 @@ const productData = [
   {
     id: 3,
     name: "Anti Hair Fall Shampoo",
+    sale_price: "₹ 299.99",
     price: "₹ 455.99",
     mrp: "₹ 599.00",
     image: "img/product-2.png",
@@ -39,6 +41,7 @@ const productData = [
   {
     id: 4,
     name: "Hair Growing Shampoo",
+    sale_price: "₹ 299.99",
     price: "₹ 600.99",
     mrp: "₹ 640.00",
     image: "img/product-2.png",
