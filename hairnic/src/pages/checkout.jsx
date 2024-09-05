@@ -1,95 +1,106 @@
-import React from "react";
-import { Card, Form, Button } from "react-bootstrap";
-
-const states = [
-  { name: "Maharashtra", zipCodes: ["400001", "400002", "400003"] },
-  { name: "Karnataka", zipCodes: ["560001", "560002", "560003"] },
-  { name: "Delhi", zipCodes: ["110001", "110002", "110003"] },
-  // Add more states and zip codes here
-];
+import React, { useState } from "react";
+import MyNavbar from "../components/MyNavbar";
+import Footer from "../components/Footer";
+import ProductTable from "../components/ProductTable";
+import CouponCode from "../components/CouponCode";
+import BillingDetails from "../components/BillingDetails";
+import CartTotals from "../components/CartTotals";
+import PaymentMethod from "../components/PaymentMethod";
 
 const Checkout = () => {
+  const [quantity1, setQuantity1] = useState(1);
+  const [quantity2, setQuantity2] = useState(1);
+
+  const [formValues, setFormValues] = useState({
+    firstName: "",
+    lastName: "",
+    country: "India",
+    streetAddress1: "",
+    streetAddress2: "",
+    city: "",
+    zipCode: "",
+    phone: "",
+    email: "",
+    termsAndConditions: false,
+  });
+
+  const [errors, setErrors] = useState({});
+
+  const increaseQuantity1 = () => setQuantity1(quantity1 + 1);
+  const decreaseQuantity1 = () => quantity1 > 1 && setQuantity1(quantity1 - 1);
+  const increaseQuantity2 = () => setQuantity2(quantity2 + 1);
+  const decreaseQuantity2 = () => quantity2 > 1 && setQuantity2(quantity2 - 1);
+
+  const price1 = 129.9;
+  const price2 = 115.7;
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormValues({
+      ...formValues,
+      [name]: type === "checkbox" ? checked : value,
+    });
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    if (!formValues.firstName) newErrors.firstName = "First name is required";
+    if (!formValues.lastName) newErrors.lastName = "Last name is required";
+    if (!formValues.zipCode) newErrors.zipCode = "ZIP code is required";
+    if (!formValues.email) newErrors.email = "Email is required";
+    if (!formValues.termsAndConditions)
+      newErrors.termsAndConditions = "You must accept the terms and conditions";
+    return newErrors;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors({}); // Reset errors before validation
+    const formErrors = validateForm();
+    if (Object.keys(formErrors).length > 0) {
+      setErrors(formErrors);
+    } else {
+      console.log("Form Submitted", formValues);
+      // Handle successful form submission logic here
+    }
+  };
+
   return (
-    <div className="container py-5">
-      <div className="row">
-        {/* Coupon Code Section */}
-        <div className="col-md-4 mb-4">
-          <Card>
-            <Card.Body>
-              <Card.Title>Coupon Code</Card.Title>
-              <p>Enter your coupon code if you have one</p>
-              <Form>
-                <Form.Group controlId="couponCode">
-                  <Form.Control type="text" placeholder="Enter coupon code" />
-                </Form.Group>
-                <Button variant="primary" className="mt-2">
-                  Apply
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </div>
-
-        {/* Estimate Shipping and Tax Section */}
-        <div className="col-md-4 mb-4">
-          <Card>
-            <Card.Body>
-              <Card.Title>Estimate Shipping and Tax</Card.Title>
-              <p>Enter your destination to get a shipping estimate</p>
-              <Form>
-                <Form.Group controlId="country">
-                  <Form.Label>Country</Form.Label>
-                  <Form.Control as="select">
-                    <option>India</option>
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="state">
-                  <Form.Label>State/Province</Form.Label>
-                  <Form.Control as="select">
-                    <option>Andhra Pradesh</option>
-                    <option>Arunachal Pradesh</option>
-                    <option>Assam</option>
-                    {/* Add more states as needed */}
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group controlId="zipCode">
-                  <Form.Label>Zip Code</Form.Label>
-                  <Form.Control type="text" placeholder="Enter zip code" />
-                </Form.Group>
-                <Button variant="primary" className="mt-2">
-                  Get Estimate
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </div>
-
-        {/* Cart Totals Section */}
-        <div className="col-md-4">
-          <Card>
-            <Card.Body>
-              <Card.Title>Cart Totals</Card.Title>
-              <ul className="list-unstyled">
-                <li>
-                  <strong>Subtotal:</strong> $100.00
-                </li>
-                <li>
-                  <strong>Delivery:</strong> $10.00
-                </li>
-                <li>
-                  <strong>Discount:</strong> $5.00
-                </li>
-                <li>
-                  <strong>Total:</strong> $115.00
-                </li>
-              </ul>
-              <Button variant="primary" className="mt-2">
-                Proceed to Payment 
-              </Button>
-            </Card.Body>
-          </Card>
+    <div>
+      <MyNavbar />
+      <div className="container-fluid container-md px-2 px-sm-3 px-md-4 py-3 py-md-5">
+        <div className="row">
+          <ProductTable
+            quantity1={quantity1}
+            quantity2={quantity2}
+            increaseQuantity1={increaseQuantity1}
+            decreaseQuantity1={decreaseQuantity1}
+            increaseQuantity2={increaseQuantity2}
+            decreaseQuantity2={decreaseQuantity2}
+            price1={price1}
+            price2={price2}
+          />
+          <CouponCode />
+          <BillingDetails
+            formValues={formValues}
+            handleChange={handleChange}
+            errors={errors}
+          />
+          <CartTotals
+            price1={price1}
+            price2={price2}
+            quantity1={quantity1}
+            quantity2={quantity2}
+          />
+          <PaymentMethod
+            formValues={formValues}
+            handleChange={handleChange}
+            errors={errors}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

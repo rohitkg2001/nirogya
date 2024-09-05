@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import productData from "./productData";
 import ProductCard from "./ProductCard";
 import { useSelector } from "react-redux";
 

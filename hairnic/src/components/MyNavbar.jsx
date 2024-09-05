@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCENT_COLOR } from "../utils/utils";
 import { Popover, OverlayTrigger, Button } from "react-bootstrap";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
@@ -10,11 +10,16 @@ const MyNavbar = () => {
   const { cart } = useSelector(state => state.cart)
 
   const [cartItems, setCartItems] = useState(0);
+  const [baseURL, setBaseURL] = useState("");
 
   useEffect(() => {
     setCartItems(cart.length);
-  }, [cart])
+  }, [cart]);
 
+  useEffect(() => {
+    const { origin } = window.location;
+    setBaseURL(origin);
+  }, []);
 
   const goToSignin = () => {
     navigate("/sign-in");
@@ -38,7 +43,7 @@ const MyNavbar = () => {
           </div>
           <hr />
           <div className="d-flex justify-content-between mb-2">
-            <span>Total: $0.00</span>
+            <span>Total: ₹ 0.00</span>
           </div>
           <hr />
           <div className="d-flex justify-content-end">
@@ -70,11 +75,15 @@ const MyNavbar = () => {
       className="container-fluid sticky-top shadow-sm"
       style={{ top: 0, backgroundColor: ACCENT_COLOR }}
     >
-      {/* <div className="container"> */}
       <nav className="navbar navbar-expand-lg navbar-light p-0">
         <a href="/" className="navbar-brand">
-          <img src="img/Nirogya_logo.jpg" alt="Hairnic" className="logo" />
+          <img
+            src={`${baseURL}/img/Nirogya_logo.jpg`}
+            alt="Nirogya"
+            className="logo"
+          />
         </a>
+
         <button
           type="button"
           className="navbar-toggler ms-auto me-0"
@@ -104,8 +113,8 @@ const MyNavbar = () => {
               className="nav-item nav-link ms-3"
             >
               <OverlayTrigger
-                show={showPopover} // Show popover based on state
-                trigger="manual" // Trigger manually
+                show={showPopover}
+                trigger="manual"
                 placement="bottom"
                 overlay={cartPopover}
               >
@@ -128,7 +137,6 @@ const MyNavbar = () => {
         </div>
       </nav>
     </div>
-    // </div>
   );
 };
 

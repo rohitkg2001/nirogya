@@ -1,3 +1,4 @@
+// export const baseURL = "https://dummyjson.com/";
 
 export const baseURL = "https://dummyjson.com/" //Our api endpoint which is localhost:4000
 
