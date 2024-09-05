@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import productData from "./productData";
 import { Button, Card } from "react-bootstrap";
+// import MyNavbar from "../components/MyNavbar";
 import MyNavbar from "../components/MyNavbar";
 import Footer from "../components/Footer";
 import {
