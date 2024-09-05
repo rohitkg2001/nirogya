@@ -6,11 +6,10 @@ import { useSelector } from "react-redux";
 
 const MyNavbar = () => {
   const navigate = useNavigate();
-  const [showPopover, setShowPopover] = useState(false);
-  const { cart } = useSelector(state => state.cart)
-
+  const { cart } = useSelector((state) => state.cart);
   const [cartItems, setCartItems] = useState(0);
   const [baseURL, setBaseURL] = useState("");
+  const [showPopover, setShowPopover] = useState(false);
 
   useEffect(() => {
     setCartItems(cart.length);
@@ -25,34 +24,79 @@ const MyNavbar = () => {
     navigate("/sign-in");
   };
 
-  // Adjusted popover size
   const popoverStyle = {
-    width: "300px",
-    maxHeight: "400px",
-    overflowY: "auto",
+    // width: "400px",
+    // height: "auto",
     border: "1px solid #efefef",
-    cursor: "default",
+    // cursor: "default",
+    boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+  };
+
+  const hrStyle = {
+    height: "1px",
+    border: "none",
+    color: "#cdcdcd",
+    backgroundColor: "#cdcdcd",
+    margin: "10px 0",
   };
 
   const cartPopover = (
     <Popover id="cart-popover" style={popoverStyle}>
-      <Popover.Header as="h3">Cart</Popover.Header>
+      <Popover.Header as="h3" className="fw-bold text-center">
+        My Cart
+      </Popover.Header>
       <Popover.Body>
-        <div className="d-flex flex-column">
-          <div className="d-flex justify-content-between mb-2">
+        {/* Price Details Section */}
+        <div className="price-details">
+          <h6 className="fw-bold mb-3" style={{ fontSize: "1.3rem" }}>
+            PRICE DETAILS
+          </h6>
+          <hr style={hrStyle} />
+          <div
+            className="d-flex justify-content-between mb-3"
+            style={{ fontSize: "1.1rem" }}
+          >
             <span>{cartItems} Items</span>
+            <span>{}₹00.00</span>
           </div>
-          <hr />
-          {/* TODO: reduce height */}
-          <div className="d-flex justify-content-between mb-2">
-            <span>Total: ₹ 0.00</span>
+          <div
+            className="d-flex justify-content-between mb-3 text-success"
+            style={{ fontSize: "1.1rem" }}
+          >
+            <span>Discount</span>
+            <span>– ₹00.0</span>
           </div>
-          <hr />
-          <div className="d-flex justify-content-end">
-            <Button variant="primary" onClick={() => navigate("/checkout")}>
-              Checkout
-            </Button>
+          <div
+            className="d-flex justify-content-between mb-3"
+            style={{ fontSize: "1.1rem" }}
+          >
+            <span>Delivery Charges</span>
+            <span>
+              <s>₹0</s> <span className="text-success">Free</span>
+            </span>
           </div>
+          <hr style={hrStyle} />
+          <div
+            className="d-flex justify-content-between mb-3 fw-bold text-black"
+            style={{ fontSize: "1.3rem" }}
+          >
+            <span>Total Amount</span>
+            <span>₹0,000</span>
+          </div>
+          <hr style={hrStyle} />
+          <div className="text-success" style={{ fontSize: "1.1rem" }}>
+            You will save ₹0,000 on this order
+          </div>
+        </div>
+
+        <div className="d-flex justify-content-end mt-4">
+          <Button
+            variant="primary"
+            style={{ fontSize: "1.2rem", padding: "10px 20px" }}
+            onClick={() => navigate("/checkout")}
+          >
+            Checkout
+          </Button>
         </div>
       </Popover.Body>
     </Popover>
@@ -60,14 +104,14 @@ const MyNavbar = () => {
 
   // Styles for the cart icon
   const cartIconStyle = {
-    width: "40px",
-    height: "40px",
+    width: "50px",
+    height: "50px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
     borderRadius: "50%",
-    backgroundColor: "#fff", // Background color of the circle
-    boxShadow: "0 2px 4px rgba(45, 45, 45, 0.1)", // Optional shadow for a 3D effect
+    backgroundColor: "#fff",
+    boxShadow: "0 2px 4px rgba(45, 45, 45, 0.1)",
     position: "relative",
     cursor: "pointer",
   };

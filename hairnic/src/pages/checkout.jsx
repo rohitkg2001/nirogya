@@ -45,7 +45,6 @@ const Checkout = () => {
   const validateForm = () => {
     const newErrors = {};
 
-
     if (!formValues.firstName) newErrors.firstName = "First name is required";
     if (!formValues.lastName) newErrors.lastName = "Last name is required";
     if (!formValues.zipCode) newErrors.zipCode = "ZIP code is required";
@@ -53,38 +52,30 @@ const Checkout = () => {
     if (!formValues.termsAndConditions)
       newErrors.termsAndConditions = "You must accept the terms and conditions";
 
-
     if (!/^\d{10}$/.test(formValues.phone))
       newErrors.phone = "Phone number must be 10 digits";
-
 
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(formValues.email))
       newErrors.email = "Invalid email address";
 
-
     if (!/^\d{6}$/.test(formValues.zipCode))
       newErrors.zipCode = "ZIP code must be 6 digits";
-
 
     if (!formValues.streetAddress1)
       newErrors.streetAddress1 = "Street Address 1 is required";
 
-
     if (!formValues.city) newErrors.city = "City is required";
-
 
     const validCountries = ["India", "USA", "UK", "Canada"];
     if (!validCountries.includes(formValues.country))
       newErrors.country = "Invalid country selected";
-
 
     if (!formValues.paymentMethod)
       newErrors.paymentMethod = "Payment method must be selected";
 
     return newErrors;
   };
-
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -150,6 +141,7 @@ const Checkout = () => {
           </div>
         </div>
       </div>
+      <hr />
       <Footer />
     </>
   );

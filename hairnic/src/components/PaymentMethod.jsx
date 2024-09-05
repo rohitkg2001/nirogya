@@ -3,7 +3,7 @@ import { Card, Form, Button, Row, Col } from "react-bootstrap";
 
 const PaymentMethod = ({ formValues, handleChange, errors, handleSubmit }) => {
   return (
-    <Card className="my-4">
+    <Card className="my-4 border-1 shadow-sm">
       <Card.Body>
         <Card.Title>Payment Method</Card.Title>
         <Form onSubmit={handleSubmit}>

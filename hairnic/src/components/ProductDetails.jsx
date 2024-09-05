@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import productData from "./productData";
 import { Button, Card } from "react-bootstrap";
-// import MyNavbar from "../components/MyNavbar";
 import MyNavbar from "../components/MyNavbar";
 import Footer from "../components/Footer";
 import {
@@ -15,7 +14,6 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
-import MyNavBar from "../components/MyNavbar"
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -23,7 +21,6 @@ const ProductDetails = () => {
   const [base_url, setBaseURL] = useState("");
   const dispatch = useDispatch();
   const { cart } = useSelector((state) => state.cart);
-  const productDetails = useSelector(state => state.products)
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));
@@ -34,7 +31,6 @@ const ProductDetails = () => {
     setProduct(thisProduct);
     const { origin } = window.location;
     setBaseURL(origin);
-    console.log(productDetails)
   }, [id]);
 
   const [quantity, setQuantity] = useState(1);
@@ -55,76 +51,45 @@ const ProductDetails = () => {
 
   if (!product)
     return (
-      <div>
-        <h5>Not Found</h5>
+      <div className="text-center py-5">
+        <h5>Product Not Found</h5>
       </div>
     );
 
   return (
-    <div className="container py-5">
-      <MyNavBar />
-      <div className="row">
-        {/* Product Image */}
-        <div className="col-md-6 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
-          {/* Featured Label */}
-          <div
-            className="position-absolute top-0 start-0 bg-warning text-dark px-3 py-1"
-            style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
-          >
-            Featured
-          </div>
-
-          <img
-            src={`${base_url}/${product.image}`}
-            alt={product.name}
-            className="img-fluid"
-            style={{
-              maxWidth: "100%",
-              maxHeight: "450px",
-              objectFit: "contain",
-            }}
-          />
-        </div>
-
-        {/* Product Details */}
-        <div className="col-md-6">
-          <h4>{product.name}</h4>
-          <div className="my-3">
-            <h6 className="text-muted">
-              M.R.P: <s>{product.mrp}</s>
-            </h6>
-            <h5 className="text-success">Price: {product.price} </h5>
-            <small className="text-muted">Inclusive of all taxes</small>
-          </div>
-
-          <h6 className="text-muted">Weight: {product.weight} Ml</h6>
-
-          {/* Product Description */}
-          <div className="my-3">
-            <p>{product.description}</p>
-          </div>
-
-          {/* Quantity Adjustment */}
-          <div className="d-flex align-items-center mb-3">
-            <span className="me-2">Quantity:</span> { }
-            <Button
+    <div>
+      <MyNavbar />
+      <div className="container-fluid py-5">
+        <div className="row">
+          {/* Product Image Section */}
+          <div className="col-md-6 col-sm-12 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
+            {/* Featured Label */}
+            <div
+              className="position-absolute top-0 start-0 bg-warning text-dark px-3 py-1"
+              style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
+            >
+              Featured
+            </div>
+            <img
+              src={`${base_url}/${product.image}`}
+              alt={product.name}
+              className="img-fluid"
               style={{
                 maxWidth: "100%",
                 maxHeight: "450px",
                 objectFit: "contain",
-
               }}
             />
           </div>
 
-          {/* Product Details */}
-          <div className="col-md-6">
+          {/* Product Details Section */}
+          <div className="col-md-6 col-sm-12">
             <h4>{product.name}</h4>
             <div className="my-3">
               <h6 className="text-muted">
                 M.R.P: <s>{product.mrp}</s>
               </h6>
-              <h5 className="text-success">Price: {product.price} </h5>
+              <h5 className="text-success">Price: ₹{product.price}</h5>
               <small className="text-muted">Inclusive of all taxes</small>
             </div>
 
@@ -137,7 +102,7 @@ const ProductDetails = () => {
             <hr />
             {/* Quantity Adjustment */}
             <div className="d-flex align-items-center mb-3">
-              <span className="me-2">Quantity:</span> { }
+              <span className="me-2">Quantity:</span>
               <Button
                 style={{
                   backgroundColor: "orange",
@@ -220,7 +185,7 @@ const ProductDetails = () => {
         <h4 className="mb-4">Customers who viewed this item also viewed</h4>
         <div className="row">
           {similarProducts.slice(0, 4).map((item) => (
-            <div key={item.id} className="col-md-3 mb-4">
+            <div key={item.id} className="col-md-3 col-sm-6 mb-4">
               <Card className="h-100 position-relative">
                 {/* Offer Label */}
                 <div
@@ -244,7 +209,7 @@ const ProductDetails = () => {
                 <Card.Body className="d-flex flex-column">
                   <Card.Title>{item.name}</Card.Title>
                   <Card.Text className="text-muted">
-                    Price: {item.price}
+                    Price: ₹{item.price}
                   </Card.Text>
                   <Button
                     variant="primary"
@@ -261,7 +226,6 @@ const ProductDetails = () => {
           ))}
         </div>
       </div>
-      <hr />
       <Footer />
     </div>
   );
