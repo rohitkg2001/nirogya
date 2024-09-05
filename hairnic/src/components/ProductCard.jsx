@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
 import { useEffect } from "react";
 import { getProductById } from "../redux/actions/productActions";
- //import { useNavigation } from 'react-router-dom'
+//import { useNavigation } from 'react-router-dom'
 
 export default function ProductCard({
   id,
@@ -15,7 +15,7 @@ export default function ProductCard({
   discount,
 }) {
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));

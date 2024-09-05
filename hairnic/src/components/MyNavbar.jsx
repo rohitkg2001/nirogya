@@ -30,6 +30,7 @@ const MyNavbar = () => {
     width: "300px",
     maxHeight: "400px",
     overflowY: "auto",
+    border: "1px solid #efefef",
     cursor: "default",
   };
 
@@ -42,6 +43,7 @@ const MyNavbar = () => {
             <span>{cartItems} Items</span>
           </div>
           <hr />
+          {/* TODO: reduce height */}
           <div className="d-flex justify-content-between mb-2">
             <span>Total: ₹ 0.00</span>
           </div>
@@ -65,7 +67,7 @@ const MyNavbar = () => {
     justifyContent: "center",
     borderRadius: "50%",
     backgroundColor: "#fff", // Background color of the circle
-    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)", // Optional shadow for a 3D effect
+    boxShadow: "0 2px 4px rgba(45, 45, 45, 0.1)", // Optional shadow for a 3D effect
     position: "relative",
     cursor: "pointer",
   };
