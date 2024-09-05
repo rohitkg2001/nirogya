@@ -1,57 +1,74 @@
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
+import { useEffect } from "react";
+import { getProductById } from "../redux/actions/productActions";
+import { useNavigation } from 'react-router-dom'
+
+const navigation = useNavigation()
 
 export default function ProductCard({ id, image, name, rating, reviews, regular_price, sale_price }) {
 
-    const dispatch = useDispatch()
-    const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+  const { cart } = useSelector(state => state.cart)
+
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));
   };
 
-    return (
-      <div className="col-md-6 col-lg-3 wow fadeIn" key={id}>
-        <div className="product-item text-center border h-100 p-4">
-          <img
-            className="img-fluid mb-4"
-            src={image}
-            alt={name}
-            style={{ maxWidth: "150px", height: "200px" }}
-          />
-          <div className="mb-2">
-            {[...Array(rating)].map((_, i) => (
-              <small className="fa fa-star text-primary" key={i} />
-            ))}
-            <small>({reviews})</small>
-          </div>
-          <a href="#" className="h6 d-inline-block mb-2">
+
+  const getProduct = async () => {
+    await dispatch(getProductById(id))
+    navigation.navigate(`/product/${id}`)
+  }
+
+
+  return (
+    <div className="col-md-6 col-lg-3" key={id}>
+      <div className="card align-items-center" style={{ borderWidth: 1, height: "55vh", backgroundColor: '#efefef' }}>
+        <img
+          src={image}
+          alt={name}
+          className="card-img-top"
+          style={{ maxWidth: "150px", height: "30vh", }}
+        />
+        <div className="card-body bg-white" style={{ width: '100%', height: '25vh' }}>
+          <h6 className="card-title text-primary ">
             {name}
-          </a>
-          <span>
-            <del className="text-muted mb-3">{regular_price}</del>
-          </span>
-          <h5 className="text-primary mb-3">
-            <strong>{sale_price}</strong>
-          </h5>
-          <div className="d-flex justify-content-center">
-            <Button
-              variant="outline-primary"
-              size="sm"
-              className="px-3 me-2"
+          </h6>
+          <div>
+            <small className="text-muted me-2">
+              MRP.:
+              <del className="text-muted mb-3">₹{regular_price}</del>
+            </small>
+            <span className="text-primary ml-3">
+              ₹<strong>{sale_price}</strong>
+            </span>
+          </div>
+          <div className="d-flex justify-content-between">
+            <small className="text-muted me-2">100 g</small>
+            <div>
+              {/* {[...Array(Math.ceil(rating))].map((_, i) => (
+                <small className="fa fa-star text-primary" style={{ fontSize: 12 }} key={i} />
+              ))} */}
+            </div>
+          </div>
+        </div>
+        <div className="card-footer w-100 bg-dark">
+          <div className="d-flex justify-content-between">
+            <button
+              className="btn btn-primary cart-btn"
               onClick={clickAddCart}
             >
               Add To Cart
-            </Button>
-            <Link to={`/product/${id}`}>
-              <Button variant="primary" size="sm" className="px-3">
-                View Details
-              </Button>
-            </Link>
+            </button>
+            <button className="btn btn-dark detail-btn" onClick={getProduct}>
+              View Detail
+            </button>
           </div>
         </div>
       </div>
-    );
+
+    </div>
+  );
 }

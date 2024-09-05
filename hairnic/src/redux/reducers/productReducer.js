@@ -1,12 +1,16 @@
-import { GET_PRODUCTS, GET_REVIEWS } from "../constant"
+import { GET_PRODUCT_BY_ID, GET_PRODUCTS, GET_REVIEWS } from "../constant"
 import { initialState } from "./initialstate"
 
 
-export const userReducer = (state = initialState, action) => {
+export const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_PRODUCTS:
             return {
                 ...state, products: action.payload
+            }
+        case GET_PRODUCT_BY_ID:
+            return {
+                ...state, productDetail: action.payload
             }
         case GET_REVIEWS:
             return { ...state, testimonial: action.payload }

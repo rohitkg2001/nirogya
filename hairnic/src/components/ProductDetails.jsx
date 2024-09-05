@@ -12,13 +12,15 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
+import MyNavBar from "../components/MyNavbar"
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [base_url, setBaseURL] = useState("");
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
+  const productDetails = useSelector(state => state.products)
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));
@@ -29,6 +31,7 @@ const ProductDetails = () => {
     setProduct(thisProduct);
     const { origin } = window.location;
     setBaseURL(origin);
+    console.log(productDetails)
   }, [id]);
 
   const [quantity, setQuantity] = useState(1);
@@ -56,6 +59,7 @@ const ProductDetails = () => {
 
   return (
     <div className="container py-5">
+      <MyNavBar />
       <div className="row">
         {/* Product Image */}
         <div className="col-md-6 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
@@ -99,7 +103,7 @@ const ProductDetails = () => {
 
           {/* Quantity Adjustment */}
           <div className="d-flex align-items-center mb-3">
-            <span className="me-2">Quantity:</span> {}
+            <span className="me-2">Quantity:</span> { }
             <Button
               style={{
                 backgroundColor: "orange",

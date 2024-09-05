@@ -7,12 +7,11 @@ import { useSelector } from "react-redux"
 const MyNavbar = () => {
   const navigate = useNavigate();
   const [showPopover, setShowPopover] = useState(false);
-  const cart = useSelector(state => state.cart)
+  const { cart } = useSelector(state => state.cart)
 
   const [cartItems, setCartItems] = useState(0);
 
   useEffect(() => {
-    console.log("My cart contains", cart)
     setCartItems(cart.length);
   }, [cart])
 
