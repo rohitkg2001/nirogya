@@ -52,7 +52,6 @@ const BillingDetails = ({ formValues, handleChange, errors }) => {
             onChange={handleChange}
           >
             <option>India</option>
-            {/* You can add more options here */}
           </Form.Control>
         </Form.Group>
 
@@ -62,7 +61,7 @@ const BillingDetails = ({ formValues, handleChange, errors }) => {
             <Col md={6}>
               <Form.Control
                 type="text"
-                placeholder="House number and street name"
+                placeholder="House number, Street name"
                 name="streetAddress1"
                 value={formValues.streetAddress1}
                 onChange={handleChange}
@@ -72,7 +71,7 @@ const BillingDetails = ({ formValues, handleChange, errors }) => {
             <Col md={6}>
               <Form.Control
                 type="text"
-                placeholder="Apartment, Society Name (optional)"
+                placeholder="Apartment, Society Name"
                 name="streetAddress2"
                 value={formValues.streetAddress2}
                 onChange={handleChange}

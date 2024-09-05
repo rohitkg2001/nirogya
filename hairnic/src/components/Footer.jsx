@@ -64,14 +64,15 @@ const Footer = () => {
         <div className="col-sm-6 col-md-6 col-lg-3">
           <div className="mb-3">
             <h5 className="mb-4">Popular Links</h5>
-            <a className="btn btn-link" href="">
-              About Us
-            </a>
+
             <a className="btn btn-link" href="">
               Contact Us
             </a>
             <a className="btn btn-link" href="">
               Privacy Policy
+            </a>
+            <a className="btn btn-link" href="">
+             Refund Policy
             </a>
             <a className="btn btn-link" href="">
               Terms & Conditions
