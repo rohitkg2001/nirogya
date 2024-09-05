@@ -1,16 +1,13 @@
-<<<<<<< HEAD
-=======
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
->>>>>>> f7999a5fafdc76bb8724b6b6aba8303241d93ad0
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
 import { useEffect } from "react";
 import { getProductById } from "../redux/actions/productActions";
-import { useNavigation } from 'react-router-dom'
+// import { useNavigation } from 'react-router-dom'
 
-const navigation = useNavigation()
+// const navigation = useNavigation()
 
 export default function ProductCard({
   id,
@@ -25,73 +22,16 @@ export default function ProductCard({
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-<<<<<<< HEAD
-  const dispatch = useDispatch()
-  const { cart } = useSelector(state => state.cart)
-
-=======
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
->>>>>>> f7999a5fafdc76bb8724b6b6aba8303241d93ad0
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));
     handleShow(); // Show the modal after adding to cart
   };
 
-<<<<<<< HEAD
-
-  const getProduct = async () => {
-    await dispatch(getProductById(id))
-    navigation.navigate(`/product/${id}`)
-  }
-
-
-  return (
-    <div className="col-md-6 col-lg-3" key={id}>
-      <div className="card align-items-center" style={{ borderWidth: 1, height: "55vh", backgroundColor: '#efefef' }}>
-        <img
-          src={image}
-          alt={name}
-          className="card-img-top"
-          style={{ maxWidth: "150px", height: "30vh", }}
-        />
-        <div className="card-body bg-white" style={{ width: '100%', height: '25vh' }}>
-          <h6 className="card-title text-primary ">
-            {name}
-          </h6>
-          <div>
-            <small className="text-muted me-2">
-              MRP.:
-              <del className="text-muted mb-3">₹{regular_price}</del>
-            </small>
-            <span className="text-primary ml-3">
-              ₹<strong>{sale_price}</strong>
-            </span>
-          </div>
-          <div className="d-flex justify-content-between">
-            <small className="text-muted me-2">100 g</small>
-            <div>
-              {/* {[...Array(Math.ceil(rating))].map((_, i) => (
-                <small className="fa fa-star text-primary" style={{ fontSize: 12 }} key={i} />
-              ))} */}
-            </div>
-          </div>
-        </div>
-        <div className="card-footer w-100 bg-dark">
-          <div className="d-flex justify-content-between">
-            <button
-              className="btn btn-primary cart-btn"
-              onClick={clickAddCart}
-            >
-              Add To Cart
-            </button>
-            <button className="btn btn-dark detail-btn" onClick={getProduct}>
-              View Detail
-            </button>
-=======
   return (
     <>
       <div className="col-md-6 col-lg-3 wow fadeIn" key={id}>
@@ -132,7 +72,7 @@ export default function ProductCard({
             <a href="#" className="h6 mb-0 text-left">
               {name}
             </a>
-            <div>
+            {/* <div>
               {[...Array(Math.floor(rating))].map((_, i) => (
                 <small
                   key={i}
@@ -141,7 +81,7 @@ export default function ProductCard({
                 />
               ))}
               <small>({reviews})</small>
-            </div>
+            </div> */}
           </div>
 
           {/* Price Section */}
@@ -169,14 +109,10 @@ export default function ProductCard({
                 View Details
               </Button>
             </Link>
->>>>>>> f7999a5fafdc76bb8724b6b6aba8303241d93ad0
           </div>
         </div>
       </div>
 
-<<<<<<< HEAD
-    </div>
-=======
       {/* Modal for displaying product details after adding to cart */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -216,6 +152,5 @@ export default function ProductCard({
         </Modal.Footer>
       </Modal>
     </>
->>>>>>> f7999a5fafdc76bb8724b6b6aba8303241d93ad0
   );
 }
