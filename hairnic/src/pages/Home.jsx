@@ -13,7 +13,7 @@ import Features from "../components/Features";
 import About from "../components/About";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/actions/productActions";
-import CheckBox from "../components/checkBox";
+
 
 
 export default function Home() {
@@ -29,8 +29,7 @@ export default function Home() {
     <>
   
       <MyNavbar />
-      <CheckBox/>
-      {/* <Hero />
+      <Hero />
       <Features />
       <About />
       <DealsOfTheDay />
@@ -39,7 +38,7 @@ export default function Home() {
       <CartProduct />
       <Testimonial />
       <BlogArticle />
-      <Contact /> */}
+      <Contact />
      
       <Footer />
       
