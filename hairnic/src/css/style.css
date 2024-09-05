@@ -467,39 +467,32 @@ img.animated.pulse {
   border-right: none;
 }
 
-/* deals of the day */
 
-.col-lg-6 {
-  background-color: transparent; /* Remove any background color */
+.card {
+  border-radius: 10px;
+}
+.card-header {
+  background-color: #f8f9fa;
+}
+.table thead th {
+  background-color: #e9ecef;
 }
 
-.img-box{
-  height: 200px;
+.fist{
+  display: flex;
 }
 
-.fromNumer{
- display:flex;
-  gap: 10px;
-}
-
-.mk-1{
+.box1{
   display:flex;
-  gap: 10px;
 }
-.row-from2{
-  margin-top: 10px;
+.box2{
+  position: absolute;
 }
-
-.row-from1{
-  margin-top: 30px;
-}
-
-.row-from3{
-  margin-top: 30px;
+.box3{
+  margin-left: 350px;
+  position: absolute;
 }
 
-.row-from5{
-  display:flex;
-  gap: 10px;
-  margin-top: 30px;
+.box4{
+  margin-left: 770px;
 }
