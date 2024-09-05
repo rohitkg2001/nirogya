@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, CloseButton } from "react-bootstrap";
 
 const ProductTable = ({
   quantity1,
@@ -10,6 +10,8 @@ const ProductTable = ({
   decreaseQuantity2,
   price1,
   price2,
+  removeProduct1,
+  removeProduct2,
 }) => {
   return (
     <Table striped bordered hover responsive>

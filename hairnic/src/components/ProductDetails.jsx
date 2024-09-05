@@ -15,13 +15,15 @@ import {
 } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/actions/cartActions";
+import MyNavBar from "../components/MyNavbar"
 
 const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [base_url, setBaseURL] = useState("");
   const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
+  const productDetails = useSelector(state => state.products)
 
   const clickAddCart = () => {
     dispatch(addToCart(id, cart));
@@ -32,6 +34,7 @@ const ProductDetails = () => {
     setProduct(thisProduct);
     const { origin } = window.location;
     setBaseURL(origin);
+    console.log(productDetails)
   }, [id]);
 
   const [quantity, setQuantity] = useState(1);
@@ -58,29 +61,58 @@ const ProductDetails = () => {
     );
 
   return (
-    <div>
-      {/* Include the Navbar at the top */}
-      <MyNavbar />
-      <div className="container py-5">
-        <div className="row">
-          {/* Product Image */}
-          <div className="col-md-6 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
-            {/* Featured Label */}
-            <div
-              className="position-absolute top-0 start-0 bg-warning text-dark px-3 py-1"
-              style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
-            >
-              Featured
-            </div>
+    <div className="container py-5">
+      <MyNavBar />
+      <div className="row">
+        {/* Product Image */}
+        <div className="col-md-6 d-flex justify-content-center align-items-center bg-light p-3 position-relative">
+          {/* Featured Label */}
+          <div
+            className="position-absolute top-0 start-0 bg-warning text-dark px-3 py-1"
+            style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
+          >
+            Featured
+          </div>
 
-            <img
-              src={`${base_url}/${product.image}`}
-              alt={product.name}
-              className="img-fluid"
+          <img
+            src={`${base_url}/${product.image}`}
+            alt={product.name}
+            className="img-fluid"
+            style={{
+              maxWidth: "100%",
+              maxHeight: "450px",
+              objectFit: "contain",
+            }}
+          />
+        </div>
+
+        {/* Product Details */}
+        <div className="col-md-6">
+          <h4>{product.name}</h4>
+          <div className="my-3">
+            <h6 className="text-muted">
+              M.R.P: <s>{product.mrp}</s>
+            </h6>
+            <h5 className="text-success">Price: {product.price} </h5>
+            <small className="text-muted">Inclusive of all taxes</small>
+          </div>
+
+          <h6 className="text-muted">Weight: {product.weight} Ml</h6>
+
+          {/* Product Description */}
+          <div className="my-3">
+            <p>{product.description}</p>
+          </div>
+
+          {/* Quantity Adjustment */}
+          <div className="d-flex align-items-center mb-3">
+            <span className="me-2">Quantity:</span> { }
+            <Button
               style={{
                 maxWidth: "100%",
                 maxHeight: "450px",
                 objectFit: "contain",
+
               }}
             />
           </div>
@@ -105,7 +137,7 @@ const ProductDetails = () => {
             <hr />
             {/* Quantity Adjustment */}
             <div className="d-flex align-items-center mb-3">
-              <span className="me-2">Quantity:</span> {}
+              <span className="me-2">Quantity:</span> { }
               <Button
                 style={{
                   backgroundColor: "orange",
@@ -195,7 +227,7 @@ const ProductDetails = () => {
                   className="position-absolute top-0 start-0 bg-warning text-dark px-2 py-1"
                   style={{ zIndex: 1, borderBottomRightRadius: "5px" }}
                 >
-                  Offer
+                  % Off
                 </div>
 
                 <Card.Img

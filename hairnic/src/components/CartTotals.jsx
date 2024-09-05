@@ -19,8 +19,21 @@ const CartTotals = ({ price1, price2, quantity1, quantity2 }) => {
                 <td>Free</td>
               </tr>
               <tr>
-                <td>Total</td>
-                <td>₹{subtotal.toFixed(2)}</td>
+                <td colSpan="2">
+                  <hr
+                    style={{
+                      width: "100%",
+                      border: "1px solid black",
+                      margin: "10px 0",
+                    }}
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <h5>Total</h5>
+                </td>
+                <h6>₹{subtotal.toFixed(2)}</h6>
               </tr>
             </tbody>
           </Table>

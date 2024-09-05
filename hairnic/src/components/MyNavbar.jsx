@@ -7,14 +7,19 @@ import { useSelector } from "react-redux";
 const MyNavbar = () => {
   const navigate = useNavigate();
   const [showPopover, setShowPopover] = useState(false);
-  const cart = useSelector((state) => state.cart);
+  const { cart } = useSelector(state => state.cart)
 
   const [cartItems, setCartItems] = useState(0);
+  const [baseURL, setBaseURL] = useState("");
 
   useEffect(() => {
-    console.log("My cart contains", cart);
     setCartItems(cart.length);
   }, [cart]);
+
+  useEffect(() => {
+    const { origin } = window.location;
+    setBaseURL(origin);
+  }, []);
 
   const goToSignin = () => {
     navigate("/sign-in");
@@ -70,10 +75,13 @@ const MyNavbar = () => {
       className="container-fluid sticky-top shadow-sm"
       style={{ top: 0, backgroundColor: ACCENT_COLOR }}
     >
-      {/* <div className="container"> */}
       <nav className="navbar navbar-expand-lg navbar-light p-0">
         <a href="/" className="navbar-brand">
-          <img src="img/Nirogya_logo.jpg" alt="Nirogya" className="logo" />
+          <img
+            src={`${baseURL}/img/Nirogya_logo.jpg`}
+            alt="Nirogya"
+            className="logo"
+          />
         </a>
 
         <button
@@ -129,7 +137,6 @@ const MyNavbar = () => {
         </div>
       </nav>
     </div>
-    // </div>
   );
 };
 

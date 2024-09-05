@@ -1,8 +1,16 @@
-import React from "react";
-import productData from "./productData";
+import React, { useEffect } from "react";
 import ProductCard from "./ProductCard";
+import { useSelector } from "react-redux";
 
 const CartProduct = () => {
+  const { products } = useSelector(state => state.products)
+  const [cartProducts, setCartProducts] = React.useState([]);
+
+  useEffect(() => {
+    setCartProducts(products)
+  }, [products])
+
+
   return (
     <div>
       <div className="container-fluid py-5">
@@ -20,20 +28,20 @@ const CartProduct = () => {
           </p>
         </div>
         <div className="row g-4">
-          {productData.map(
+          {cartProducts.map(
             (
-              { id, image, name, rating, reviews, regular_price, sale_price },
+              { id, thumbnail, title, rating, reviews, price, discountPercentage },
               index
             ) => (
               <ProductCard
                 key={index}
                 id={id}
-                image={image}
-                name={name}
+                image={thumbnail}
+                name={title}
                 rating={rating}
                 reviews={reviews}
-                regular_price={regular_price}
-                sale_price={sale_price}
+                regular_price={price}
+                sale_price={parseFloat(price * ((100 - discountPercentage) / 100)).toFixed(2)}
               />
             )
           )}

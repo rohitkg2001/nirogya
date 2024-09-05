@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
 import MyNavbar from "../components/MyNavbar";
 import Footer from "../components/Footer";
 import ProductTable from "../components/ProductTable";
@@ -89,6 +88,7 @@ const validateForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setErrors({}); // Reset errors before validation
     const formErrors = validateForm();
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
