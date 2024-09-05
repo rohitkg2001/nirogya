@@ -69,6 +69,7 @@ img.animated.pulse {
   transition: 0.5s;
   background-color: var(--bs-primary);
 }
+
 .logo {
   height: 60px;
   width: 150px;
@@ -199,7 +200,7 @@ img.animated.pulse {
   z-index: 1;
 }
 
-.hero-header .breadcrumb-item + .breadcrumb-item::before {
+.hero-header .breadcrumb-item+.breadcrumb-item::before {
   color: var(--bs-light);
 }
 
@@ -227,6 +228,7 @@ img.animated.pulse {
   background: url(../img/bg.png) center center no-repeat;
   background-size: cover;
 }
+
 /* .col-lg-6 {
   background-color: transparent; 
 } */
@@ -470,5 +472,13 @@ img.animated.pulse {
 /* deals of the day */
 
 .col-lg-6 {
-  background-color: transparent; /* Remove any background color */
+  background-color: transparent;
+  /* Remove any background color */
 }
+
+.cart-btn {
+  padding: 0px;
+  margin: 0px;
+}
+
+/* TODO:add .cart-btn style */

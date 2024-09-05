@@ -11,17 +11,20 @@ import Contact from "../components/Contact";
 import DealsOfTheDay from "../components/DealsOfTheDay";
 import Features from "../components/Features";
 import About from "../components/About";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../redux/actions/productActions";
 
 export default function Home() {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchProds = async () => {
       await dispatch(getProducts());
     };
     fetchProds();
   }, []);
+
+
 
   return (
     <>
