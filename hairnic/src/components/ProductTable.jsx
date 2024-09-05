@@ -14,7 +14,7 @@ const ProductTable = ({
   removeProduct2,
 }) => {
   return (
-    <div className="col-12 mb-4 bg-white">
+    <div className="col-12 mb-4 ">
       <Table striped bordered hover className="table-responsive">
         <thead style={{ backgroundColor: "#8BC34A", color: "white" }}>
           <tr>
